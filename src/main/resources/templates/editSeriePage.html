@@ -1,0 +1,54 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+</head>
+<body>
+<div class="col-5" style="margin-top: 15%; margin-left: 30%">
+    <div class="container">
+        <div class="card bg-dark">
+            <div class="card-header bg-primary text-white text-center">
+                <h3>Editar Serie</h3>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/serie/update}" method="POST" id="invoiceForm" th:object="${serie}">
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="id">ID</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="text" th:field="*{id}" class="form-control" readonly/>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="nombre_serie">Nombre</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="text" th:field="*{nombre_serie}" class="form-control"/>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="marca">Marca</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="text" th:field="*{marca}" class="form-control"/>
+                        </div>
+                    </div><br/>
+                    <button type="submit" class="offset-3 btn btn-success">Actualizar <i class="fa fa-wrench" aria-hidden="true"></i></button>
+                    <a th:href="@{/serie/getAllSeries}" class= "btn btn-primary">Listado Series</a>
+                </form>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+    </div></div>
+</body>
+</html>
