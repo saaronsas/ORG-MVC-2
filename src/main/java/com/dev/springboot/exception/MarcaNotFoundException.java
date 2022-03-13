@@ -8,6 +8,10 @@ public class MarcaNotFoundException extends RuntimeException {
         super();
     }
 
+    /**
+     * Pasa al constructor el custom error
+     * @param customMessage mensaje de error para mostrar
+     */
     public MarcaNotFoundException(String customMessage) {
         super(customMessage);
     }

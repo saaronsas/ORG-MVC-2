@@ -13,11 +13,11 @@
 <body>
 <div class="col-5" style="margin-top: 15%; margin-left: 30%">
     <div class="container">
-        <div class="card bg-dark">
+        <div class="card bg-dark text-center text-white">
             <div class="card-header bg-primary text-white text-center">
                 <h3>Editar Vehiculo</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body text-center text-white">
                 <form th:action="@{/vehiculo/update}" method="POST" id="invoiceForm" th:object="${vehiculo}">
                     <div class="row">
                         <div class="col-2">
@@ -48,11 +48,13 @@
                             <label for="serie">Serie</label>
                         </div>
                         <div class="col-4">
-                            <input type="text" th:field="*{serie}" class="form-control"/>
+                            <select name="serie" id="serie" class="form-select form-select-lg" style="height: 100%; width: 100%">
+                                <option th:each="ob:${series}" th:value="${ob.id}" th:text="${ob.nombre_serie}"></option>
+                            </select>
                         </div>
                     </div><br/>
                     <button type="submit" class="offset-3 btn btn-success">Actualizar <i class="fa fa-wrench" aria-hidden="true"></i></button>
-                    <a th:href="@{/vehiculo/getAllVehiuclos}" class= "btn btn-primary">Listado Vehiuclos</a>
+                    <a th:href="@{/vehiculo/getAllVehiculos}" class= "btn btn-primary">Listado Vehiuclos</a>
                 </form>
             </div>
             <div class="card-footer"></div>

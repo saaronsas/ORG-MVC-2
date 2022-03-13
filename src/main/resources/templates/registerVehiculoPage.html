@@ -15,7 +15,7 @@
             <div class="card-header bg-info text-center text-white">
                 <h3>Registrar Vehiculo</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body text-center text-white">
                 <form th:action="@{/vehiculo/save}" method="POST" id="vehiculoForm">
                     <div class="row">
                         <div class="col-2">
@@ -40,12 +40,13 @@
                             <label for="serie"><b>Serie</b></label>
                         </div>
                         <div class="col-4">
-                            <datalist name="serie" id="serie"
-                                   class="form-control" options="${lists}"/>
+                            <select name="serie" id="serie" class="form-select form-select-lg" style="height: 100%; width: 100%">
+                                <option th:each="ob:${series}" th:value="${ob.id}" th:text="${ob.nombre_serie}"></option>
+                            </select>
                         </div>
                     </div> <br/>
                     <button type="submit" class="offset-3 btn btn-success">Guardar Vehiculo <i class="fa fa-plus-square" aria-hidden="true"></i></button>
-                    <a th:href="@{/vehiculo/getAllVehiculo}" class= "btn btn-primary">Listado Vehiculos</a>
+                    <a th:href="@{/vehiculo/getAllVehiculos}" class= "btn btn-primary">Listado Vehiculos</a>
                 </form>
             </div>
             <div th:if="${message!=null}"  class="card-footer bg-white text-info">

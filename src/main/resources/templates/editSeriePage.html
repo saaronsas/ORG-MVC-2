@@ -13,11 +13,11 @@
 <body>
 <div class="col-5" style="margin-top: 15%; margin-left: 30%">
     <div class="container">
-        <div class="card bg-dark">
+        <div class="card bg-dark text-center text-white">
             <div class="card-header bg-primary text-white text-center">
                 <h3>Editar Serie</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body text-center text-white">
                 <form th:action="@{/serie/update}" method="POST" id="invoiceForm" th:object="${serie}">
                     <div class="row">
                         <div class="col-2">
@@ -40,7 +40,9 @@
                             <label for="marca">Marca</label>
                         </div>
                         <div class="col-4">
-                            <input type="text" th:field="*{marca}" class="form-control"/>
+                            <select name="marca" id="marca" class="form-select form-select-lg" style="height: 100%; width: 100%">
+                                <option th:each="ob:${marcas}" th:value="${ob.id}" th:text="${ob.nombre_marca}"></option>
+                            </select>
                         </div>
                     </div><br/>
                     <button type="submit" class="offset-3 btn btn-success">Actualizar <i class="fa fa-wrench" aria-hidden="true"></i></button>

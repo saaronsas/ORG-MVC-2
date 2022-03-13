@@ -5,6 +5,9 @@ import com.dev.springboot.model.Vehiculo;
 
 import java.util.List;
 
+/**
+ * Interfaz del service, implementa las funciones de VehiculoServiceImpl
+ */
 public interface IVehiculoService {
 
     public Vehiculo saveVehiculo(Vehiculo vehiculo);

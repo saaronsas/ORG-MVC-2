@@ -11,11 +11,11 @@
 <body>
 <div class="col-5" style="margin-top: 15%; margin-left: 30%">
     <div class="container">
-        <div class="card bg-dark">
+        <div class="card bg-dark text-white">
             <div class="card-header bg-info text-center text-white">
                 <h3>Lista de las Series</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body text-white">
                 <table class="table table-hover">
                     <tr class="bg-dark text-white">
                         <th>ID</th>
@@ -23,9 +23,9 @@
                         <th>Marca</th>
                     </tr>
                     <tr th:each="ob:${list}">
-                        <td th:text=${ob.id}></td>
-                        <td th:text=${ob.nombre_serie}></td>
-                        <td th:text=${ob.marca.nombre_marca}></td>
+                        <td class="text-white" th:text=${ob.id}></td>
+                        <td class="text-white" th:text=${ob.nombre_serie}></td>
+                        <td class="text-white" th:text=${ob.marca.nombre_marca}></td>
                         <td><a th:href="@{/serie/delete(id=${ob.id})}" class= "btn btn-danger">BORRAR <i class="fa fa-trash-o" aria-hidden="true"></i></a> |
                             <a th:href="@{/serie/edit(id=${ob.id})}" class="btn btn-warning">EDITAR <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                     </tr>

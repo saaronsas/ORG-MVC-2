@@ -8,6 +8,10 @@ public class VehiculoNotFoundException extends RuntimeException {
         super();
     }
 
+    /**
+     * Pasa al constructor el custom error
+     * @param customMessage mensaje de error para mostrar
+     */
     public VehiculoNotFoundException(String customMessage) {
         super(customMessage);
     }

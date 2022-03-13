@@ -8,6 +8,10 @@ public class SerieNotFoundException extends RuntimeException {
         super();
     }
 
+    /**
+     * Pasa al constructor el custom error
+     * @param customMessage mensaje de error para mostrar
+     */
     public SerieNotFoundException(String customMessage) {
         super(customMessage);
     }

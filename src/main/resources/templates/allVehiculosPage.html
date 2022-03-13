@@ -24,16 +24,16 @@
                         <th>Serie</th>
                     </tr>
                     <tr th:each="ob:${list}">
-                        <td th:text=${ob.id}></td>
-                        <td th:text=${ob.matricula}></td>
-                        <td th:text=${ob.color}></td>
-                        <td th:text=${ob.serie.nombre_serie}></td>
+                        <td class="text-white" th:text=${ob.id}></td>
+                        <td class="text-white" th:text=${ob.matricula}></td>
+                        <td class="text-white" th:text=${ob.color}></td>
+                        <td class="text-white" th:text=${ob.serie.nombre_serie}></td>
                         <td><a th:href="@{/vehiculo/delete(id=${ob.id})}" class= "btn btn-danger">BORRAR <i class="fa fa-trash-o" aria-hidden="true"></i></a> |
                             <a th:href="@{/vehiculo/edit(id=${ob.id})}" class="btn btn-warning">EDITAR <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                     </tr>
                 </table>
                 <a th:href="@{/vehiculo/register}" class= "offset-3 btn btn-success ">Añadir vehiculo <i class="fa fa-plus-square" aria-hidden="true"></i></a>
-                <a th:href="@{/serie/}" class= "btn btn-primary">Inicio</a>
+                <a th:href="@{/vehiculo/}" class= "btn btn-primary">Inicio</a>
             </div>
             <div class="card-footer bg-white text-success" th:if="${message!=null}">
                 <span th:text="${message}"></span>

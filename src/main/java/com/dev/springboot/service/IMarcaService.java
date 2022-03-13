@@ -4,6 +4,9 @@ import com.dev.springboot.model.Marca;
 
 import java.util.List;
 
+/**
+ * Interfaz del service, implementa las funciones de MarcaServiceImpl
+ */
 public interface IMarcaService {
 
     public Marca saveMarca(Marca marca);

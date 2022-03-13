@@ -15,19 +15,39 @@ import java.util.List;
 @RequestMapping("/marca")
 public class MarcaController {
 
+    /**
+     * IMarcaService para poder llamar a las funciones
+     */
     @Autowired
     private IMarcaService service;
 
+    /**
+     * Pagina de Inicio
+     * - Method GET
+     * @return homePage
+     */
     @GetMapping("/")
     public String showHomePage() {
         return "homePage";
     }
 
+    /**
+     * Pagina de Registro
+     * - Method GET
+     * @return registerMarcaPage
+     */
     @GetMapping("/register")
     public String showRegistration() {
         return "registerMarcaPage";
     }
 
+    /**
+     * Guarda la información
+     * - Method POST
+     * @param marca el atributo de Marca
+     * @param model clase Model
+     * @return registerMarcaPage
+     */
     @PostMapping("/save")
     public String saveMarca(
             @ModelAttribute Marca marca,
@@ -40,17 +60,32 @@ public class MarcaController {
         return "registerMarcaPage";
     }
 
+    /**
+     * Pagina de listado de Marcas
+     * - Method GET
+     * @param message mensaje a mostrar
+     * @param model clase Model
+     * @return allMarcasPage
+     */
     @GetMapping("/getAllMarcas")
     public String getAllMarcas(
             @RequestParam(value = "message", required = false) String message,
             Model model
     ) {
-        List<Marca> marcas= service.getAllMarcas();
+        List<Marca> marcas = service.getAllMarcas();
         model.addAttribute("list", marcas);
         model.addAttribute("message", message);
         return "allMarcasPage";
     }
 
+    /**
+     * Pagina de edición de Marcas
+     * - Method GET
+     * @param model clase Model
+     * @param attributes clase RedirectAttributes
+     * @param id id de la marca a modificar
+     * @return page
+     */
     @GetMapping("/edit")
     public String getEditPage(
             Model model,
@@ -70,6 +105,13 @@ public class MarcaController {
         return page;
     }
 
+    /**
+     * Actualiza la información
+     * - Method POST
+     * @param marca el atributo de Marca editado
+     * @param attributes clase RedirectAttributes
+     * @return getAllMarcas
+     */
     @PostMapping("/update")
     public String updateMarca(
             @ModelAttribute Marca marca,
@@ -81,6 +123,13 @@ public class MarcaController {
         return "redirect:getAllMarcas";
     }
 
+    /**
+     * Actualiza la marca seleccionada
+     * - Method GET
+     * @param id indice de la marca a borrar
+     * @param attributes clase RedirectAttributes
+     * @return getAllMarcas
+     */
     @GetMapping("/delete")
     public String deleteMarca(
             @RequestParam Integer id,

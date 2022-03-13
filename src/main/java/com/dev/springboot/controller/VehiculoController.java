@@ -2,7 +2,9 @@ package com.dev.springboot.controller;
 
 import com.dev.springboot.exception.VehiculoNotFoundException;
 import com.dev.springboot.model.Vehiculo;
+import com.dev.springboot.service.ISerieService;
 import com.dev.springboot.service.IVehiculoService;
+import com.dev.springboot.service.impl.SerieServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,21 +17,48 @@ import java.util.List;
 @RequestMapping("/vehiculo")
 public class VehiculoController {
 
+    /**
+     * IVehiculoService para poder llamar a las funciones
+     */
     @Autowired
     private IVehiculoService service;
 
+    /**
+     * ISerieService para poder llamar a las funciones
+     */
+    @Autowired
+    private ISerieService serieService;
+
+    /**
+     * Pagina de Inicio
+     * - Method GET
+     * @return homeVehiculoPage
+     */
     @GetMapping("/")
     public String showHomePage() {
         return "homeVehiculoPage";
     }
 
+    /**
+     * Pagina de Registro
+     * - Method GET
+     * @return registerVehiculoPage
+     */
     @GetMapping("/register")
-    public String showRegistration() {
-        return "registerVehiculoPage";
+    public String showRegistration(Model model) {
+        model.addAttribute("series", serieService.getAllSeries());
+        return "registerVehiculoPage.html";
     }
 
+    /**
+     * Guarda la información
+     * - Method POST
+     * @param vehiculo el atributo de Vehiculo
+     * @param model clase Model
+     * @return registerVehiculoPage
+     */
     @PostMapping("/save")
-    public String saveSerie(
+    public String saveVehiculo(
             @ModelAttribute Vehiculo vehiculo,
             Model model
     ) {
@@ -37,10 +66,17 @@ public class VehiculoController {
         Integer id = service.saveVehiculo(vehiculo).getId();
         String message = "Id : '"+id+"' ha sido guardado con exito!";
         model.addAttribute("message", message);
-        return "registerVehiculoPage";
+        return "registerVehiculoPage.html";
     }
 
-    @GetMapping("/getAllVehiculo")
+    /**
+     * Pagina de listado de Vehiculos
+     * - Method GET
+     * @param message mensaje a mostrar
+     * @param model clase Model
+     * @return allVehiculosPage
+     */
+    @GetMapping("/getAllVehiculos")
     public String getAllVehiculos(
             @RequestParam(value = "message", required = false) String message,
             Model model
@@ -51,6 +87,14 @@ public class VehiculoController {
         return "allVehiculosPage";
     }
 
+    /**
+     * Pagina de edición de Vehiculos
+     * - Method GET
+     * @param model clase Model
+     * @param attributes clase RedirectAttributes
+     * @param id id de la vehiculo a modificar
+     * @return page
+     */
     @GetMapping("/edit")
     public String getEditPage(
             Model model,
@@ -61,6 +105,7 @@ public class VehiculoController {
         try {
             Vehiculo vehiculo = service.getVehiculoById(id);
             model.addAttribute("vehiculo", vehiculo);
+            model.addAttribute("series", serieService.getAllSeries());
             page="editVehiculoPage";
         } catch (VehiculoNotFoundException e) {
             e.printStackTrace();
@@ -70,6 +115,13 @@ public class VehiculoController {
         return page;
     }
 
+    /**
+     * Actualiza la información
+     * - Method POST
+     * @param vehiculo el atributo de Vehiculo editado
+     * @param attributes clase RedirectAttributes
+     * @return getAllVehiculos
+     */
     @PostMapping("/update")
     public String updateVehiculo(
             @ModelAttribute Vehiculo vehiculo,
@@ -81,6 +133,13 @@ public class VehiculoController {
         return "redirect:getAllVehiculos";
     }
 
+    /**
+     * Actualiza la vehiculo seleccionada
+     * - Method GET
+     * @param id indice de la vehiculo a borrar
+     * @param attributes clase RedirectAttributes
+     * @return getAllVehiculos
+     */
     @GetMapping("/delete")
     public String deleteVehiculo(
             @RequestParam Integer id,
